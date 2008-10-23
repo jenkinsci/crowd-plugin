@@ -1,0 +1,11 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+	<f:entry title="${%Crowd URL}" help="/plugin/crowd/help-global-url.html">
+	  <f:textbox name="crowd.url" value="${instance.url}" />
+	</f:entry>
+    <f:entry title="${%Application Name}" help="/plugin/crowd/help-global-appname.html">
+      <f:textbox name="crowd.applicationName" value="${instance.applicationName}" />
+    </f:entry>
+    <f:entry title="${%Application Password}" help="/plugin/crowd/help-global-apppassword.html">
+      <f:password name="crowd.applicationPassword" value="${instance.applicationPassword}" />
+    </f:entry>
+</j:jelly>
