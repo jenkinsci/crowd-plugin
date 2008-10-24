@@ -17,7 +17,7 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 import com.atlassian.crowd.integration.service.soap.client.ClientProperties;
 
 public class CrowdSecurityRealm extends SecurityRealm {
-    private static Logger log = Logger.getLogger(CrowdSecurityRealm.class);
+    private static org.apache.log4j.Logger log = Logger.getLogger(CrowdSecurityRealm.class);
 
     public final String url;
 
@@ -47,11 +47,9 @@ public class CrowdSecurityRealm extends SecurityRealm {
     }
 
     public SecurityComponents createSecurityComponents() {
-        Properties props = new Properties();
-        props.setProperty("application.name", applicationName);
-        props.setProperty("application.password", applicationPassword);
-        props.setProperty("crowd.server.url", url);
-        props.setProperty("session.validationinterval", "5");
+    	
+    	
+        
 
         // load the base configuration from the crowd-integration-client jar
         XmlWebApplicationContext crowdConfigContext = new XmlWebApplicationContext();
@@ -67,9 +65,19 @@ public class CrowdSecurityRealm extends SecurityRealm {
         WebApplicationContext context = builder.createApplicationContext();
 
         // configure the ClientProperties object
-        ClientProperties clientProperties = (ClientProperties) crowdConfigContext
-                .getBean("clientProperties");
-        clientProperties.updateProperties(props);
+        if (applicationName != null || applicationPassword != null || url != null) {
+    		Properties props = new Properties();
+            props.setProperty("application.name", applicationName);
+            props.setProperty("application.password", applicationPassword);
+            props.setProperty("crowd.server.url", url);
+            props.setProperty("session.validationinterval", "5");
+            ClientProperties clientProperties = (ClientProperties) crowdConfigContext
+            	.getBean("clientProperties");
+            clientProperties.updateProperties(props);
+    	} else {
+    		log.warn("Client properties are incomplete");
+    	}
+        
 
         return new SecurityComponents(findBean(AuthenticationManager.class, context), findBean(
                 UserDetailsService.class, context));
