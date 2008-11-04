@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import org.acegisecurity.userdetails.UsernameNotFoundException;
 import org.springframework.dao.DataAccessException;
 
-import com.atlassian.crowd.integration.acegi.CrowdUserDetails;
+import com.atlassian.crowd.integration.acegi.user.CrowdUserDetails;
 
 /**
  * MailAddressResolver that will look up a mail address via Crowd.
