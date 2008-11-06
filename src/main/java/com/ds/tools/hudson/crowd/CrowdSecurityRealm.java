@@ -47,10 +47,6 @@ public class CrowdSecurityRealm extends SecurityRealm {
     }
 
     public SecurityComponents createSecurityComponents() {
-    	
-    	
-        
-
         // load the base configuration from the crowd-integration-client jar
         XmlWebApplicationContext crowdConfigContext = new XmlWebApplicationContext();
         crowdConfigContext.setClassLoader(getClass().getClassLoader());
@@ -66,18 +62,17 @@ public class CrowdSecurityRealm extends SecurityRealm {
 
         // configure the ClientProperties object
         if (applicationName != null || applicationPassword != null || url != null) {
-    		Properties props = new Properties();
+            Properties props = new Properties();
             props.setProperty("application.name", applicationName);
             props.setProperty("application.password", applicationPassword);
             props.setProperty("crowd.server.url", url);
             props.setProperty("session.validationinterval", "5");
             ClientProperties clientProperties = (ClientProperties) crowdConfigContext
-            	.getBean("clientProperties");
+                    .getBean("clientProperties");
             clientProperties.updateProperties(props);
-    	} else {
-    		log.warn("Client properties are incomplete");
-    	}
-        
+        } else {
+            log.warn("Client properties are incomplete");
+        }
 
         return new SecurityComponents(findBean(AuthenticationManager.class, context), findBean(
                 UserDetailsService.class, context));
