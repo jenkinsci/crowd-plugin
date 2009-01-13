@@ -2,7 +2,6 @@ package com.ds.tools.hudson.crowd;
 
 import hudson.model.Hudson;
 import hudson.model.User;
-import hudson.security.HudsonFilter;
 import hudson.tasks.MailAddressResolver;
 
 import java.util.logging.Level;
@@ -11,7 +10,7 @@ import java.util.logging.Logger;
 import org.acegisecurity.userdetails.UsernameNotFoundException;
 import org.springframework.dao.DataAccessException;
 
-import com.atlassian.crowd.integration.acegi.CrowdUserDetails;
+import com.atlassian.crowd.integration.acegi.user.CrowdUserDetails;
 
 /**
  * MailAddressResolver that will look up a mail address via Crowd.
@@ -28,8 +27,8 @@ public class CrowdMailAddressResolver extends MailAddressResolver {
         if (!(hudson.getSecurityRealm() instanceof CrowdSecurityRealm))
             return null;
         try {
-            CrowdUserDetails details = (CrowdUserDetails) HudsonFilter.USER_DETAILS_SERVICE_PROXY
-                    .loadUserByUsername(u.getId());
+            CrowdUserDetails details = (CrowdUserDetails) hudson.getSecurityRealm()
+                    .getSecurityComponents().userDetails.loadUserByUsername(u.getId());
             String mail = details.getEmail();
             if (mail == null)
                 return null; // not found

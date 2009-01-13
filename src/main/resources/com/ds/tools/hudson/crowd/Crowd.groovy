@@ -1,19 +1,17 @@
 import org.acegisecurity.providers.ProviderManager
 import org.acegisecurity.providers.anonymous.AnonymousAuthenticationProvider
-import com.atlassian.crowd.integration.acegi.CrowdUserDetailsService
-import com.atlassian.crowd.integration.acegi.CrowdAuthenticationProvider
 import org.acegisecurity.providers.rememberme.RememberMeAuthenticationProvider
+import com.atlassian.crowd.integration.acegi.user.CrowdUserDetailsServiceImpl
+import com.atlassian.crowd.integration.acegi.RemoteCrowdAuthenticationProvider
 import hudson.model.Hudson
 
-crowdUserDetailsService(CrowdUserDetailsService) {
-	securityServerClient = ref("securityServerClient")
+crowdUserDetailsService(CrowdUserDetailsServiceImpl) {
+    authenticationManager = ref("crowdAuthenticationManager")
+    groupMembershipManager = ref("crowdGroupMembershipManager")
+    userManager = ref("crowdUserManager")
 }
 
-// global so that this bean can be retrieved as UserDetailsService
-crowdAuthenticationProvider(CrowdAuthenticationProvider) {
-	userDetailsService = crowdUserDetailsService
-	httpAuthenticator = ref("httpAuthenticator")
-	securityServerClient = ref("securityServerClient")
+crowdAuthenticationProvider(RemoteCrowdAuthenticationProvider, ref("crowdAuthenticationManager"), ref("httpAuthenticator"), ref("crowdUserDetailsService")) {
 }
 
 authenticationManager(ProviderManager) {

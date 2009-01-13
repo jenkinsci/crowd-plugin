@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This is, in short, a duplicate of applicationContext-CrowdClient.xml from Crowd's integration JAR, but with a different
+cache implementation. The standard Crowd cache implementation uses ehcache, which won't work with Hudson due to class loading issues. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean id="resourceLocator" class="com.atlassian.crowd.integration.service.soap.client.ClientResourceLocator">
+        <constructor-arg value="crowd.properties"/>
+    </bean>
+
+    <bean id="clientProperties" class="com.atlassian.crowd.integration.service.soap.client.ClientPropertiesImpl">
+        <constructor-arg type="com.atlassian.crowd.integration.service.soap.client.ResourceLocator" ref="resourceLocator"/>
+    </bean>
+
+    <bean id="securityServerClient" class="com.atlassian.crowd.integration.service.soap.client.SecurityServerClientImpl">
+        <constructor-arg ref="clientProperties"/>
+    </bean>
+
+    <bean id="crowdAuthenticationManager" class="com.atlassian.crowd.integration.service.cache.AuthenticationManagerImpl">
+        <constructor-arg ref="securityServerClient"/>
+    </bean>
+
+    <bean id="httpAuthenticator" class="com.atlassian.crowd.integration.http.HttpAuthenticatorImpl">
+        <constructor-arg ref="crowdAuthenticationManager"/>
+    </bean>
+
+    <bean id="verifyTokenFilter" class="com.atlassian.crowd.integration.http.VerifyTokenFilter" lazy-init="true">
+        <constructor-arg ref="httpAuthenticator"/>
+    </bean>
+
+    <bean id="clientCache" class="com.ds.tools.hudson.crowd.NoOpCache" />
+
+    <bean id="crowdUserManager" class="com.atlassian.crowd.integration.service.cache.CachingUserManager">
+        <constructor-arg index="0" ref="securityServerClient"/>
+        <constructor-arg index="1" ref="clientCache"/>
+    </bean>
+
+    <bean id="crowdGroupMembershipManager" class="com.atlassian.crowd.integration.service.cache.CachingGroupMembershipManager">
+        <constructor-arg index="0" ref="securityServerClient"/>
+        <constructor-arg index="1" ref="crowdUserManager"/>
+        <constructor-arg index="2" ref="crowdGroupManager"/>
+        <constructor-arg index="3" ref="clientCache"/>
+    </bean>
+
+    <bean id="crowdGroupManager" class="com.atlassian.crowd.integration.service.cache.CachingGroupManager">
+        <constructor-arg index="0" ref="securityServerClient"/>
+        <constructor-arg index="1" ref="clientCache"/>
+    </bean>
+
+</beans>
+
