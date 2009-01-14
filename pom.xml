@@ -2,6 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <description>Hudson SecurityRealm enabling the use of Atlassian's Crowd identity management server.</description>
+    <url>http://hudson.gotdns.com/wiki/display/HUDSON/Crowd+plugin</url>
     <parent>
         <groupId>org.jvnet.hudson.plugins</groupId>
         <artifactId>plugin</artifactId>
@@ -11,6 +13,7 @@
     <groupId>com.ds.tools.hudson</groupId>
     <artifactId>crowd</artifactId>
     <packaging>hpi</packaging>
+    <name>Crowd Integration for Hudson</name>
     <version>1.0-SNAPSHOT</version>
     <build>
         <plugins>
