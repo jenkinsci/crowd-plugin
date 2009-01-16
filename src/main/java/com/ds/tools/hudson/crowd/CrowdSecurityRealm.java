@@ -50,8 +50,12 @@ public class CrowdSecurityRealm extends SecurityRealm {
         // load the base configuration from the crowd-integration-client jar
         XmlWebApplicationContext crowdConfigContext = new XmlWebApplicationContext();
         crowdConfigContext.setClassLoader(getClass().getClassLoader());
+        /*
+         * crowdConfigContext .setConfigLocations(new String[] {
+         * "classpath:/applicationContext-HudsonCrowdClient.xml" });
+         */
         crowdConfigContext
-                .setConfigLocations(new String[] { "classpath:/applicationContext-HudsonCrowdClient.xml" });
+                .setConfigLocations(new String[] { "classpath:/applicationContext-CrowdClient.xml" });
         crowdConfigContext.refresh();
 
         // load the Hudson-Crowd configuration from Crowd.groovy
