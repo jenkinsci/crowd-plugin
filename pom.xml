@@ -12,7 +12,7 @@
     <artifactId>crowd</artifactId>
     <packaging>hpi</packaging>
     <name>Crowd Integration for Hudson</name>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
     <build>
         <plugins>
             <plugin>
@@ -39,10 +39,4 @@
         	<version>2.5</version>
         </dependency>
     </dependencies>
-
-  <scm>
-    <connection>scm:svn:https://guest@svn.dev.java.net/svn/hudson/tags/crowd-1.0</connection>
-    <developerConnection>scm:svn:https://svn.dev.java.net/svn/hudson/tags/crowd-1.0</developerConnection>
-    <url>https://hudson.dev.java.net/source/browse/hudson/hudson/plugins/crowd/tags/crowd-1.0</url>
-  </scm>
 </project>
