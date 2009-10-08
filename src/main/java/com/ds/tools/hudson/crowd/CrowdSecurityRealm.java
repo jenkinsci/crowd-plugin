@@ -1,6 +1,7 @@
 package com.ds.tools.hudson.crowd;
 
 import groovy.lang.Binding;
+import hudson.Extension;
 import hudson.model.Descriptor;
 import hudson.security.SecurityRealm;
 import hudson.util.spring.BeanBuilder;
@@ -25,9 +26,8 @@ public class CrowdSecurityRealm extends SecurityRealm {
 
     public final String applicationPassword;
 
+    @Extension
     public static final class DescriptorImpl extends Descriptor<SecurityRealm> {
-        public static final DescriptorImpl INSTANCE = new DescriptorImpl();
-
         public DescriptorImpl() {
             super(CrowdSecurityRealm.class);
         }
@@ -81,9 +81,4 @@ public class CrowdSecurityRealm extends SecurityRealm {
         return new SecurityComponents(findBean(AuthenticationManager.class, context), findBean(
                 UserDetailsService.class, context));
     }
-
-    public Descriptor<SecurityRealm> getDescriptor() {
-        return DescriptorImpl.INSTANCE;
-    }
-
 }

@@ -1,5 +1,6 @@
 package com.ds.tools.hudson.crowd;
 
+import hudson.Extension;
 import hudson.model.Hudson;
 import hudson.model.User;
 import hudson.tasks.MailAddressResolver;
@@ -18,6 +19,7 @@ import com.atlassian.crowd.integration.acegi.user.CrowdUserDetails;
  * @author justinedelson
  * 
  */
+@Extension
 public class CrowdMailAddressResolver extends MailAddressResolver {
 
     @Override
