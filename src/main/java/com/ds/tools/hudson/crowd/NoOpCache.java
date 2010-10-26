@@ -186,6 +186,10 @@ public class NoOpCache implements BasicCache {
         return null;
     }
 
+    public SOAPPrincipal getUserWithAttributes(String s) {
+        return null;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -271,6 +275,27 @@ public class NoOpCache implements BasicCache {
      */
     public void removeFromAllUsers(String userName) {
         // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getUserName(String s) {
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getGroupName(String s) {
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void addOrReplaceUserWithAttributes(SOAPPrincipal soapPrincipal) {
 
     }
 
