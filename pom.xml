@@ -13,7 +13,7 @@
     <artifactId>crowd</artifactId>
     <packaging>hpi</packaging>
     <name>Crowd Integration</name>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2</version>
     <developers>
         <developer>
             <id>nbudin</id>
