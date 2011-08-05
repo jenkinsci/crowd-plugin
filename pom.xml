@@ -1,17 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <description>Hudson SecurityRealm enabling the use of Atlassian's Crowd identity management server.</description>
-    <url>http://wiki.hudson-ci.org/display/HUDSON/Crowd+Plugin</url>
+    <description>
+        SecurityRealm enabling the use of Atlassian's Crowd identity management server.
+    </description>
+    <url>http://wiki.jenkins-ci.org/display/JENKINS/Crowd+Plugin</url>
     <parent>
-        <groupId>org.jvnet.hudson.plugins</groupId>
+        <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>1.318</version>
-        <relativePath>../pom.xml</relativePath>
+        <version>1.398</version>
     </parent>
     <groupId>com.ds.tools.hudson</groupId>
     <artifactId>crowd</artifactId>
     <packaging>hpi</packaging>
-    <name>Crowd Integration for Hudson</name>
+    <name>Crowd Integration</name>
     <version>1.2-SNAPSHOT</version>
     <developers>
         <developer>
@@ -41,4 +42,9 @@
             <version>2.5</version>
         </dependency>
     </dependencies>
+    <scm>
+        <connection>scm:git:git://github.com/jenkinsci/crowd-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:jenkinsci/crowd-plugin.git</developerConnection>
+        <url>https://github.com/jenkinsci/crowd-plugin</url>
+    </scm>
 </project>
